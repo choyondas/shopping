@@ -1,29 +1,39 @@
-document.getElementById('plusButton').addEventListener('click', function() {
-    const inputField = document.getElementById('inputField');
-    const previousValue = parseInt(inputField.value);
-    const newValue = previousValue + 1;
-    inputField.value = newValue;
-
-    const price = document.getElementById('price');
-    const previousPrice = parseInt(price.innerText);
-    const newPrice = previousPrice + 1219;
-    price.innerText = newPrice;
-
-});
-document.getElementById('minusButton').addEventListener('click', function() {
-    if (inputField.value >= 1) {
-        const inputField = document.getElementById('inputField');
-        const previousValue = parseInt(inputField.value);
-        const newValue = previousValue - 1;
-        inputField.value = newValue;
+function updateProduct(product, price, isIncreasing) {
+    const productInput = document.getElementById(product + '-number');
+    let productNumber = productInput.value;
 
 
-        const price = document.getElementById('price');
-        const previousPrice = parseInt(price.innerText);
-        const newPrice = previousPrice - 1219;
-        price.innerText = newPrice;
+    if (isIncreasing == true) {
+        productNumber = parseInt(productNumber) + 1;
+
+    } else if (productNumber > 0) {
+        productNumber = parseInt(productNumber) - 1;
+
     }
+    productInput.value = productNumber;
+    //update case total;
+    const productTotal = document.getElementById(product + '-total');
+    productTotal.innerText = productNumber * price;
 
-});
-const price = document.getElementById('price');
-const previousPrice = price.innerText;
+
+
+}
+
+//case value;
+document.getElementById('case-plus').addEventListener('click', function() {
+    updateProduct('case', 59, true);
+})
+document.getElementById('case-minus').addEventListener('click', function() {
+    updateProduct('case', 59, false);
+
+})
+
+
+//phone value
+
+document.getElementById('phone-plus').addEventListener('click', function() {
+    updateProduct('phone', 1219, true);
+})
+document.getElementById('phone-minus').addEventListener('click', function() {
+    updateProduct('phone', 1219, false);
+})
